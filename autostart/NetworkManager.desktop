@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Network Manager
+GenericName=Network Manager
+Comment=Set and edit Network configurations
+Exec=nm-applet
+Terminal=false
+Type=Applet
+Categories=Network;System;Admin;
+StartupNotify=false
+
