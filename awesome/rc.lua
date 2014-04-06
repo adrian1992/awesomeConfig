@@ -2,10 +2,13 @@
 require("awful")
 require("awful.autofocus")
 require("awful.rules")
+
 -- Theme handling library
 require("beautiful")
+
 -- Notification library
 require("naughty")
+require("vicious")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -103,6 +106,36 @@ c_game={
 	{ "Steam",		"steam" },
 	{ "Minecraft",		"minecraft" }
 }
+x = " -e xrandr "
+out  = {"--output HDMI1 ", "--output VGA1 ", "--output LVDS1 "}
+size = {"--off ", "--mode 1920x1080 ", "--mode 1024x768 ", "--mode 800x600 ", "--mode 1366x768 "}
+pos  = {"--left-of ", "--right-of ", "--same-as ", "--below ", "--above "}
+
+c_lvds = {
+	{ "Normal",		terminal .. x .. out[1] .. size[1] .. out[2] .. size[1] .. out[3] .. size[5] },
+	{ "OFF",		terminal .. x .. out[3] .. size[1] }
+}
+c_hdmi = {
+	{ "Normal HD Right",	terminal .. x .. out[3] .. size[5] .. out[1] .. size[2] .. pos[2] .. "LVDS1" },
+	{ "Normal HD Left",	terminal .. x .. out[3] .. size[5] .. out[1] .. size[2] .. pos[1] .. "LVDS1" },
+	{ "Mirror HD",		terminal .. x .. out[3] .. size[3] .. out[1] .. size[3] .. pos[3] .. "LVDS1 " },
+	{ "Mirror", 		terminal .. x .. out[3] .. size[4] .. out[1] .. size[4] .. pos[3] .. "LVDS1 " },
+	{ "OFF",		terminal .. x .. out[3] .. size[5] .. out[1] .. size[1] }
+}
+c_vga = {
+	{ "Normal HD Right",	terminal .. x .. out[3] .. size[5] .. out[2] .. size[2]  .. pos[1] .. "LVDS1" },
+	{ "Normal HD Left",	terminal .. x .. out[3] .. size[5] .. out[2] .. size[1]  .. pos[1] .. "LVDS1" },
+	{ "Mirror HD",		terminal .. x .. out[2] .. size[3] .. pos[3] .. "LVDS1 " .. out[3] .. size[3] },
+	{ "Mirror",		terminal .. x .. out[2] .. size[4] .. pos[3] .. "LVDS1 " ..	out[3] .. size[4] },
+	{ "OFF",		terminal .. x .. out[2] .. size[1] }
+}
+c_screen = {
+	{ "HDMI", 	c_hdmi	}, 
+	{ "VGA", 	c_vga 	}, 
+	--{ "LVDS", 	c_lvds 	}
+	{ "LVDS - Nrml",terminal .. x .. out[1] .. size[1] .. out[2] .. size[1] .. out[3] .. size[5] },
+	{ "LVDS - OFF",	terminal .. x .. out[3] .. size[1] }
+}
 
 c_system = {
 	{ "Control Center",	"gnome-control-center" },
@@ -115,6 +148,7 @@ mymainmenu = awful.menu({ items = { { "awesome", 		myawesomemenu, beautiful.awes
 					{ "Media",		c_media},
 					{ "Office",		c_office},
 					{ "Games",		c_game},
+					{ "Screen",		c_screen},
 					{ "System",		c_system},
                                     	{ "Debian",		debian.menu.Debian_menu.Debian },
                                     	{ "open terminal", 	terminal }
@@ -126,6 +160,12 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- }}}
 
 -- {{{ Wibox
+c_mem = widget({ type = "textbox" })
+-- vicious.register(c_mem, vicious.widget.mem, " RAM[$1MP] | ", 1)
+
+c_cpu = widget({ type="textbox" })
+-- vicious.register(c_cpu, vicious.widgets.cpu, " CPU[$1MP] |",1 )
+
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 
@@ -207,6 +247,8 @@ for s = 1, screen.count() do
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
+	c_mem,
+	c_cpu,
         mytextclock,
         s == 1 and mysystray or nil,
         mytasklist[s],
