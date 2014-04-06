@@ -445,4 +445,4 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- Startup programs
 awful.util.spawn_with_shell("nm-applet")
 awful.util.spawn_with_shell("skype")
-awful.util.spawn_with_shell("dropbox start -e")
+awful.util.spawn_with_shell("dropbox start")
