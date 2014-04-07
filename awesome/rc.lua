@@ -10,8 +10,9 @@ require("beautiful")
 require("naughty")
 require("vicious")
 
+
 -- Load Debian menu entries
-require("debian.menu")
+-- require("debian.menu")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -104,7 +105,8 @@ c_office = {
 
 c_game={
 	{ "Steam",		"steam" },
-	{ "Minecraft",		"minecraft" }
+	{ "Minecraft",		"minecraft" },
+	{ "Dopewars",		"dopewars" }
 }
 x = " -e xrandr "
 out  = {"--output HDMI1 ", "--output VGA1 ", "--output LVDS1 "}
@@ -150,7 +152,7 @@ mymainmenu = awful.menu({ items = { { "awesome", 		myawesomemenu, beautiful.awes
 					{ "Games",		c_game},
 					{ "Screen",		c_screen},
 					{ "System",		c_system},
-                                    	{ "Debian",		debian.menu.Debian_menu.Debian },
+--                                    	{ "Debian",		debian.menu.Debian_menu.Debian },
                                     	{ "open terminal", 	terminal }
                                   }
                         })
@@ -445,6 +447,9 @@ awful.rules.rules = {
 	{ rule = { class = "Steam" },
 	properties = { tag = tags[1][7],
 		floating = false } },
+	{ rule = { class = "Dopewars"},
+	properties = { tag = tags[1][7] }
+	},
 
 			-- Fullscreen youtube videos
 	{ rule = { instance = "plugin-container" },properties = { floating = true } },
