@@ -88,7 +88,8 @@ myawesomemenu = {
 c_std = {
 	{ "FireFox",		"firefox" },
 	{ "ThunderBird",	"thunderbird" },
-	{ "Skype",		"skype"}
+	{ "Skype",		"skype"},
+	{ "Transmission",	"transmission-gtk"}
 }
 
 c_media = {
@@ -140,6 +141,7 @@ c_screen = {
 }
 
 c_system = {
+	{ "PasswordManager",	"keepassx" },
 	{ "Control Center",	"gnome-control-center" },
   	{ "AlsaMixer",		terminal .. " -e alsamixer" },
 	{ "Log Out",		"gnome-session-quit" }
@@ -420,6 +422,9 @@ awful.rules.rules = {
 	{ rule = { class = "Firefox" },
 	properties = { tag = tags[1][3],
 		floating = false } },
+	{ rule = { class = "Transmission" },
+	properties = { tag = tags[1][3]}
+		},
 
     -- Set Com to always map on tags number 4 of screen 1.
 	{ rule = { class = "Thunderbird" },
