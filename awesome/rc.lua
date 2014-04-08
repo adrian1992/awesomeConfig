@@ -101,6 +101,7 @@ c_office = {
 	{ "Calculator",		"gnome-calculator" },
   	{ "LibreOffice",	"libreoffice" },
 	{ "Gummi",		"gummi" },
+	{ "Calibre",		"calibre" },
 	{ "Gimp", 		"gimp" }
 }
 
@@ -438,6 +439,9 @@ awful.rules.rules = {
 	{ rule = { class = "vlc" },
 	properties = { tag = tags[1][5],
 		floating = false } },
+	{ rule = { class = "calibre" },
+	properties = { tag = tags[1][5] }
+			},
 
     -- Set Text to always map on tags number 6 of screen 1.
 	{ rule = { class = "Gedit" },
