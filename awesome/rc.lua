@@ -111,7 +111,7 @@ c_game={
 	{ "Dopewars",		"dopewars" }
 }
 x = " -e xrandr "
-out  = {"--output HDMI1 ", "--output VGA1 ", "--output LVDS1 "}
+out  = {"--output HDMI-0 ", "--output VGA-0 ", "--output LVDS "}
 size = {"--off ", "--mode 1920x1080 ", "--mode 1024x768 ", "--mode 800x600 ", "--mode 1366x768 "}
 pos  = {"--left-of ", "--right-of ", "--same-as ", "--below ", "--above "}
 
@@ -120,17 +120,17 @@ c_lvds = {
 	{ "OFF",		terminal .. x .. out[3] .. size[1] }
 }
 c_hdmi = {
-	{ "Normal HD Right",	terminal .. x .. out[3] .. size[5] .. out[1] .. size[2] .. pos[2] .. "LVDS1" },
-	{ "Normal HD Left",	terminal .. x .. out[3] .. size[5] .. out[1] .. size[2] .. pos[1] .. "LVDS1" },
-	{ "Mirror HD",		terminal .. x .. out[3] .. size[3] .. out[1] .. size[3] .. pos[3] .. "LVDS1 " },
-	{ "Mirror", 		terminal .. x .. out[3] .. size[4] .. out[1] .. size[4] .. pos[3] .. "LVDS1 " },
+	{ "Normal HD Right",	terminal .. x .. out[3] .. size[5] .. out[1] .. size[2] .. pos[2] .. "LVDS" },
+	{ "Normal HD Left",	terminal .. x .. out[3] .. size[5] .. out[1] .. size[2] .. pos[1] .. "LVDS" },
+	{ "Mirror HD",		terminal .. x .. out[3] .. size[3] .. out[1] .. size[3] .. pos[3] .. "LVDS " },
+	{ "Mirror", 		terminal .. x .. out[3] .. size[4] .. out[1] .. size[4] .. pos[3] .. "LVDS " },
 	{ "OFF",		terminal .. x .. out[3] .. size[5] .. out[1] .. size[1] }
 }
 c_vga = {
-	{ "Normal HD Right",	terminal .. x .. out[3] .. size[5] .. out[2] .. size[2]  .. pos[1] .. "LVDS1" },
-	{ "Normal HD Left",	terminal .. x .. out[3] .. size[5] .. out[2] .. size[1]  .. pos[1] .. "LVDS1" },
-	{ "Mirror HD",		terminal .. x .. out[2] .. size[3] .. pos[3] .. "LVDS1 " .. out[3] .. size[3] },
-	{ "Mirror",		terminal .. x .. out[2] .. size[4] .. pos[3] .. "LVDS1 " ..	out[3] .. size[4] },
+	{ "Normal HD Right",	terminal .. x .. out[3] .. size[5] .. out[2] .. size[2]  .. pos[2] .. "LVDS" },
+	{ "Normal HD Left",	terminal .. x .. out[3] .. size[5] .. out[2] .. size[2]  .. pos[1] .. "LVDS" },
+	{ "Mirror HD",		terminal .. x .. out[2] .. size[3] .. pos[3] .. "LVDS " .. out[3] .. size[3] },
+	{ "Mirror",		terminal .. x .. out[2] .. size[4] .. pos[3] .. "LVDS " .. out[3] .. size[4] },
 	{ "OFF",		terminal .. x .. out[2] .. size[1] }
 }
 c_screen = {
@@ -499,6 +499,15 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 -- {{{
 -- Startup programs
-awful.util.spawn_with_shell("nm-applet")
-awful.util.spawn_with_shell("skype")
-awful.util.spawn_with_shell("dropbox start")
+
+function run_once(cmd)
+  findme = cmd
+  firstspace = cmd:find(" ")
+  if firstspace then
+    findme = cmd:sub(0, firstspace-1)
+  end
+  awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
+end
+run_once("nm-applet")
+run_once("skype")
+run_once("dropbox start")
