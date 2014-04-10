@@ -112,52 +112,22 @@ c_game={
 	{ "Minecraft",		"minecraft" },
 	{ "Dopewars",		"dopewars" }
 }
--- x = " -e xrandr "
--- out  = {"--output HDMI-0 ", "--output VGA-0 ", "--output LVDS "}
--- size = {"--off ", "--mode 1920x1080 ", "--mode 1024x768 ", "--mode 800x600 ", "--mode 1366x768 "}
--- pos  = {"--left-of ", "--right-of ", "--same-as ", "--below ", "--above "}
 
--- c_lvds = {
---	{ "Normal",		terminal .. x .. out[1] .. size[1] .. out[2] .. size[1] .. out[3] .. size[5] },
---	{ "OFF",		terminal .. x .. out[3] .. size[1] }
--- }
--- c_hdmi = {
--- 	{ "Normal HD Right",	terminal .. x .. out[3] .. size[5] .. out[1] .. size[2] .. pos[2] .. "LVDS" },
--- 	{ "Normal HD Left",	terminal .. x .. out[3] .. size[5] .. out[1] .. size[2] .. pos[1] .. "LVDS" },
---	{ "Mirror HD",		terminal .. x .. out[3] .. size[3] .. out[1] .. size[3] .. pos[3] .. "LVDS " },
---	{ "Mirror", 		terminal .. x .. out[3] .. size[4] .. out[1] .. size[4] .. pos[3] .. "LVDS " },
---	{ "OFF",		terminal .. x .. out[3] .. size[5] .. out[1] .. size[1] }
--- }
--- c_vga = {
---	{ "Normal HD Right",	terminal .. x .. out[3] .. size[5] .. out[2] .. size[2]  .. pos[2] .. "LVDS" },
---	{ "Normal HD Left",	terminal .. x .. out[3] .. size[5] .. out[2] .. size[2]  .. pos[1] .. "LVDS" },
---	{ "Mirror HD",		terminal .. x .. out[2] .. size[3] .. pos[3] .. "LVDS " .. out[3] .. size[3] },
---	{ "Mirror",		terminal .. x .. out[2] .. size[4] .. pos[3] .. "LVDS " .. out[3] .. size[4] },
---	{ "OFF",		terminal .. x .. out[2] .. size[1] }
--- }
--- c_screen = {
--- 	{ "HDMI", 	c_hdmi	}, 
---	{ "VGA", 	c_vga 	}, 
---	{ "LVDS", 	c_lvds 	}
---	{ "LVDS - Nrml",terminal .. x .. out[1] .. size[1] .. out[2] .. size[1] .. out[3] .. size[5] },
---	{ "LVDS - OFF",	terminal .. x .. out[3] .. size[1] }
--- }
 
--- c_system = {
---	{ "PasswordManager",	"keepassx" },
---	{ "Control Center",	"gnome-control-center" },
---	{ "AlsaMixer",		terminal .. " -e alsamixer" },
---	{ "Log Out",		"gnome-session-quit" },
---	{ "Reboot",		"sudo shutdown -r now" },
---	{ "Turn off",		"sudo shutdown -h now" }
--- }
+c_system = {
+	{ "PasswordManager",	"keepassx" },
+	{ "Control Center",	"gnome-control-center" },
+	{ "AlsaMixer",		terminal .. " -e alsamixer" },
+	{ "Log Out",		"gnome-session-quit" },
+	{ "Reboot",		"sudo shutdown -r now" },
+	{ "Turn off",		"sudo shutdown -h now" }
+}
 
 mymainmenu = awful.menu({ items = { { "awesome", 		myawesomemenu, beautiful.awesome_icon },
 					{ "Web",		c_std},
 					{ "Media",		c_media},
 					{ "Office",		c_office},
 					{ "Games",		c_game},
---					{ "Screen",		c_screen},
 					{ "System",		c_system},
 --                                    	{ "Debian",		debian.menu.Debian_menu.Debian },
                                     	{ "open terminal", 	terminal }
