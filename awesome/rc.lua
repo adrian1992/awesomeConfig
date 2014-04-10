@@ -8,7 +8,7 @@ require("beautiful")
 
 -- Notification library
 require("naughty")
-require("vicious")
+vicious = require("vicious")
 
 
 -- Load Debian menu entries
@@ -145,7 +145,9 @@ c_system = {
 	{ "PasswordManager",	"keepassx" },
 	{ "Control Center",	"gnome-control-center" },
   	{ "AlsaMixer",		terminal .. " -e alsamixer" },
-	{ "Log Out",		"gnome-session-quit" }
+	{ "Log Out",		"gnome-session-quit" },
+	{ "Reboot",		"sudo shutdown -r now" },
+	{ "Turn off",		"sudo shutdown -h now" }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", 		myawesomemenu, beautiful.awesome_icon },
@@ -165,6 +167,7 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- }}}
 
 -- {{{ Wibox
+
 c_mem = widget({ type = "textbox" })
 -- vicious.register(c_mem, vicious.widget.mem, " RAM[$1MP] | ", 1)
 
@@ -274,6 +277,8 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    awful.key({ modkey,		  }, "Up",     function () awful.util.spawn(terminal .. " -e amixer set Master 5%+") end),
+    awful.key({ modkey,           }, "Down",   function () awful.util.spawn(terminal .. " -e amixer set Master 5%-") end),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
