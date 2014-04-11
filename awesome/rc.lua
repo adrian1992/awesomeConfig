@@ -87,6 +87,7 @@ myawesomemenu = {
 
 c_std = {
 	{ "FireFox",		"firefox" },
+	{ "IRC",		"xchat" },
 	{ "ThunderBird",	"thunderbird" },
 	{ "Skype",		"skype"},
 	{ "Transmission",	"transmission-gtk"}
