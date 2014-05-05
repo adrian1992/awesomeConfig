@@ -72,7 +72,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "MAIN", "DEV", "WEB", "COM", "MEDIA", "TEXT", "GAME" }, s, layouts[1])
+    tags[s] = awful.tag({ "MAIN", "DEV", "WEB", "COM", "MEDIA", "OFFICE", "GAME" }, s, layouts[1])
 end
 -- }}}
 
@@ -278,8 +278,6 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
-    awful.key({ modkey,		  }, "Up",     function () awful.util.spawn(terminal .. " -e amixer set Master 5%+") end),
-    awful.key({ modkey,           }, "Down",   function () awful.util.spawn(terminal .. " -e amixer set Master 5%-") end),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
@@ -294,12 +292,19 @@ globalkeys = awful.util.table.join(
         end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
+    --Volume manipulation
+    awful.key({ modkey,           }, "Up",     function () awful.util.spawn(terminal .. " -e amixer set Master 5%+") end),
+    awful.key({ modkey,           }, "Down",   function () awful.util.spawn(terminal .. " -e amixer set Master 5%-") end),
+    awful.key({ modkey,		  }, "m",      function () awful.util.spawn(terminal .. " -e amixer set Master mute") end),
+    awful.key({ modkey,           }, "u",      function () awful.util.spawn(terminal .. " -e amixer set Master unmute") end),
+
+
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+--    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
@@ -416,9 +421,9 @@ awful.rules.rules = {
 		buttons = clientbuttons } },
 
     -- Set Main to always map on tags number 1 of screen 1.
---	{ rule = { class = "Terminal" },
---	properties = { tag = tags[1][3],
---		floating = false } },
+	{ rule = { class = "KeepassX" },
+	properties = { tag = tags[1][1],
+		floating = false } },
 
     -- Set DEV to always map on tags number 2 of screen 1.
 	{ rule = { class = "Eclipse" },
@@ -434,6 +439,9 @@ awful.rules.rules = {
 		},
 
     -- Set Com to always map on tags number 4 of screen 1.
+	{ rule = { class = "Xchat" },
+	properties = { tag = tags[1][4],
+		floating = false } },
 	{ rule = { class = "Thunderbird" },
 	properties = { tag = tags[1][4],
 		floating = false } },
@@ -442,7 +450,7 @@ awful.rules.rules = {
 		floating = false } },
 
     -- Set Media to always map on tags number 5 of screen 1.
-	{ rule = { class = "vlc" },
+	{ rule = { instance = "vlc" },
 	properties = { tag = tags[1][5],
 		floating = false } },
 	{ rule = { class = "calibre" },
