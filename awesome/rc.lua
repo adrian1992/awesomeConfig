@@ -109,7 +109,8 @@ c_office = {
 c_game={
 	{ "Steam",		"steam" },
 	{ "Minecraft",		"minecraft" },
-	{ "Dopewars",		"dopewars" }
+	{ "Dopewars",		"dopewars" },
+	{ "0 AD",		"0ad" }
 }
 x = " -e xrandr "
 out  = {"--output HDMI-0 ", "--output VGA-0 ", "--output LVDS "}
@@ -421,7 +422,7 @@ awful.rules.rules = {
 		buttons = clientbuttons } },
 
     -- Set Main to always map on tags number 1 of screen 1.
-	{ rule = { class = "KeepassX" },
+	{ rule = { class = "KeePassX" },
 	properties = { tag = tags[1][1],
 		floating = false } },
 
@@ -452,7 +453,7 @@ awful.rules.rules = {
     -- Set Media to always map on tags number 5 of screen 1.
 	{ rule = { instance = "vlc" },
 	properties = { tag = tags[1][5],
-		floating = false } },
+		floating = true } },
 	{ rule = { class = "calibre" },
 	properties = { tag = tags[1][5] }
 			},
@@ -473,6 +474,8 @@ awful.rules.rules = {
 	{ rule = { class = "Dopewars"},
 	properties = { tag = tags[1][7] }
 	},
+	{ rule = { class = "0ad" },
+	properties = { tag = tags[1][7] } },
 
 			-- Fullscreen youtube videos
 	{ rule = { instance = "plugin-container" },properties = { floating = true } },
