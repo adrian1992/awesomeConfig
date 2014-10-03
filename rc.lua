@@ -94,23 +94,34 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 c_internet = {
-    {"FireFox",     "firefox"},
-    {"Skype",       "skype"}
+    {"FireFox",       "firefox"},
+    {"Skype",         "skype"},
+    {"Email",          "thunderbird"},
+    {"BitTorrent",  "transmission-gtk"}
 }
 
 c_text = {
     {"Atom",        "atom"},
-    {"Adobe Reader",          "acroread"}
+    {"Adobe Reader",          "acroread"},
+    {"Gummi",   "gummi"},
+    {"Dia",         "dia"}
 }
 
 c_media = {
-    {"VLC",          "vlc"}
+    {"VLC",          "vlc"},
+    {"Calibre",      "calibre"}
+}
+
+c_game = {
+    {"Steam", "steam"}
 }
 
 c_admin = {
     {"LSHW",      "lshw"},
     {"Password Manager",      "keepassx"},
-    {"Settings",   "gnome-control-center"}
+    {"Settings",   "gnome-control-center"},
+    {"GParted",   "gparted"},
+    {"File manager", "nautilus"}
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
