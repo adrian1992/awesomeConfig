@@ -128,6 +128,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "Internet",          c_internet},
                                     { "Text",                c_text},
                                     { "Media",              c_media},
+                                    { "Gaming",           c_game },
                                     { "Admin",             c_admin},
                                     { "open terminal", terminal }
                                   }
